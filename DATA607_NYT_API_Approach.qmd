@@ -1,0 +1,47 @@
+---
+title: "Using a New York Times API in R: Approach"
+author: "Ummay Rukiya"
+date: "2026-10-28"
+format:
+  html:
+    toc: true
+    theme: flatly
+---
+
+## Overview
+
+For this assignment, I plan to use the New York Times Most Popular API to explore which newspaper sections appear most often among its most-viewed articles over the past seven days. I am interested in seeing which topics are most represented in that list.
+
+I will request the data in R, convert the JSON response into a clean data frame, and count the articles in each section. These counts will describe the articles returned by the API, rather than the total number of views each section received.
+
+## Selected API and Request
+
+I plan to use the Most Popular API’s most-viewed endpoint:
+
+<https://api.nytimes.com/svc/mostpopular/v2/viewed/7.json>
+
+The `7` specifies a seven-day period. I will create an account through the New York Times Developer Portal, enable the Most Popular API for my application, and obtain an API key.
+
+I will store the key in an environment variable named `NYT_API_KEY` and access it in R using `Sys.getenv("NYT_API_KEY")`. The key will not appear in my Quarto document, GitHub repository, or published output.
+
+## Planned Approach
+
+I will use `httr2` to send the request and check whether it was successful. Then I will parse the JSON response and extract the article records into a data frame.
+
+I plan to keep the article title, section, publication date, author byline, and URL. I will use `dplyr` to count the articles in each section and arrange the results from highest to lowest. A summary table and bar chart will show which sections appear most often in the returned list.
+
+## Data-Cleaning Decisions
+
+I will convert publication dates into R’s date format and check for missing or blank section names. Articles without a section will be labeled “Unknown” so they remain included in the counts.
+
+The response may contain nested information, such as multimedia details. I will leave out fields that are not needed for my question and keep one row per article.
+
+## Anticipated Challenges
+
+The main challenges may be setting up the API key, handling request errors, and finding the article records within the JSON response. I will check the response before transforming it and avoid displaying my key in any output.
+
+The most-viewed list changes over time, so running the same request on another day may produce different results. I will record when I retrieved the data to give the findings context.
+
+## Expected Outcome
+
+The final result will include a tidy article data frame, a table of article counts by section, and a bar chart. I will use these outputs to answer which sections are most represented in the seven-day most-viewed list. I will also explain that this is a snapshot of the returned articles and does not measure total readership.
