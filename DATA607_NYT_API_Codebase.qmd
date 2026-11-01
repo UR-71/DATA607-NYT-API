@@ -1,0 +1,13 @@
+---
+title: "Using a New York Times API in R"
+author: "Ummay Rukiya"
+date: "2026-11-01"
+format:
+  html:
+    toc: true
+    code-fold: true
+    theme: flatly
+execute:
+  echo: true
+  warning: false
+---
